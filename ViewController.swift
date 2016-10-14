@@ -20,9 +20,9 @@ class ViewController: UIViewController {
         
         let newUser = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context)
         
-        newUser.setValue("Anthony", forKey: "username")
+        newUser.setValue("Alex", forKey: "username")
         newUser.setValue("password1", forKey: "password")
-        newUser.setValue(99, forKey: "age")
+        newUser.setValue(17, forKey: "age")
         
         do {
             
@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Users") //Allows user to get the data back from the database. Fetch everything within the entity "Users"
         
         request.predicate = NSPredicate(format: "username = %@", "Felicia") // To only return a particular value
+        request.predicate = NSPredicate(format: "age >= %@", "50")
         
         request.returnsObjectsAsFaults = false
         
