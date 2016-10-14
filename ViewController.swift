@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate // refers to AppDelegate   
         
         let context = appDelegate.persistentContainer.viewContext // use context to access CoreData, save or restore data from the entity that was created
         
@@ -23,6 +23,17 @@ class ViewController: UIViewController {
         newUser.setValue("Felicia", forKey: "username")
         newUser.setValue("password1", forKey: "password")
         newUser.setValue(99, forKey: "age")
+        
+        do {
+            
+            try context.save()
+            print("Saved")
+            
+        } catch {
+            
+            print("There was an error")
+            
+        }
     
     }
 
