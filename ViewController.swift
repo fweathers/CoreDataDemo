@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate // refers to AppDelegate   
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate // refers to AppDelegate
         
         let context = appDelegate.persistentContainer.viewContext // use context to access CoreData, save or restore data from the entity that was created
         
@@ -34,7 +34,36 @@ class ViewController: UIViewController {
             print("There was an error")
             
         }
-    
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Users") //Allows user to get the data back from the database. Fetch everything within the entity "Users"
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+                    if let username = result.value(forKey: "username") as? String {
+                        
+                        print(username)
+                    }
+                    
+                }
+                
+            } else {
+                
+                print("No results")
+                
+            }
+            
+        } catch {
+            
+            print("Couldn't fetch data")
+        }
     }
 
     override func didReceiveMemoryWarning() {
