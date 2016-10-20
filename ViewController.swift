@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         
         let context = appDelegate.persistentContainer.viewContext // use context to access CoreData, save or restore data from the entity that was created
         
+        /*
         let newUser = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context)
         
         newUser.setValue("Alex", forKey: "username")
@@ -34,6 +35,7 @@ class ViewController: UIViewController {
             print("There was an error")
             
         }
+         */
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Users") //Allows user to get the data back from the database. Fetch everything within the entity "Users"
         
@@ -52,7 +54,17 @@ class ViewController: UIViewController {
                     
                     if let username = result.value(forKey: "username") as? String {
                         
-                        print(username)
+                        result.setValue("Twinnie", forKey: "username")
+                        
+                        do {
+                            
+                            try context.save()
+                            
+                        } catch {
+                            
+                            print("Rename failed")
+                            
+                        }
                     }
                     
                 }
